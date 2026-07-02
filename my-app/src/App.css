@@ -1,0 +1,19 @@
+#center {
+    display: 'flex';
+    justify-content: 'center'
+}
+
+.toolbar {
+  width: 100%;
+  background-color: rgb(71, 71, 71);
+  margin-bottom: 30px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.brush1 {
+    background-color: black;
+    width: 3px;
+    height: 3px;
+}
