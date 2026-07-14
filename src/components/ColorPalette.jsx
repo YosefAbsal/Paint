@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import './ColorPalette.css';
 import airbrushArt from '../assets/AIRBRUSHART.png';
 import pencilArt from '../assets/PENCILART.png';
+import eraserArt from '../assets/ERASER.png';
 
 let exportRgb = {};
 
@@ -40,7 +41,11 @@ function ColorPalette(props) {
     }
     colors.push(newColor(255, 255, 255, ++id))
 
-    let classNames = ['rInput', 'gInput', 'bInput'];
+    let classNames = [
+        {input: 'rInput', colorVal: brush.r, r: 'r'}, 
+        {input: 'gInput', colorVal: brush.g, g: 'g'}, 
+        {input: 'bInput', colorVal: brush.b, b: 'b'}, 
+    ];
 
     const isInt = (value) => {
         let intMaybe = Number(value);
@@ -69,19 +74,32 @@ function ColorPalette(props) {
                 })}
             </div>
             <div className='slidersAndColorDisp'>
-                {classNames.map((name) => {
+                {classNames.map((name, i) => {
                     return <input
-                        className= {`${name}`}
+                        className= {`${name.input}`}
                         type='range'
                         min={0}
                         max={255}
-                        value={`${brush.r}`}
+                        value={`${name.colorVal}`}
                         onChange={(e) => {
-                            setBrush({
-                                ...brush,
-                                r: isInt(e.target.value)
-                            });
-                    }} />
+                            if (i === 0) {
+                                setBrush({
+                                    ...brush,
+                                    r: isInt(e.target.value)
+                                });
+                            } else if (i === 1) {
+                                setBrush({
+                                    ...brush,
+                                    g: isInt(e.target.value)
+                                });
+                            } else {
+                                setBrush({
+                                    ...brush,
+                                    b: isInt(e.target.value)
+                                });
+                            }
+                         }
+                        } />
                 })}
                 <div 
                     className='colorDisplay' 
@@ -91,12 +109,15 @@ function ColorPalette(props) {
                         backgroundColor: `rgb(${brush.r}, ${brush.g}, ${brush.b})`
                 }} />
             </div>
-            <div className='brushButtons'>
+            <div className='toolButtons'>
                 <button onClick={() => setBrush({...brush, type: 'airbrush'})}>
-                    <img src={airbrushArt} />
+                    <img src={airbrushArt} alt='air brush'/>
                 </button>
                 <button onClick={() => setBrush({...brush, type: 'basicbrush'})}>
-                    <img src={pencilArt} />
+                    <img src={pencilArt} alt='pen'/>
+                </button>
+                <button onClick={() => setBrush({...brush, r: 255, g: 255, b: 255, type: 'basicbrush'})}>
+                    <img src={eraserArt} alt='eraser'/>
                 </button>
             </div>
             <div className='brushSize'>
