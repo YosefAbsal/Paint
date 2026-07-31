@@ -1,23 +1,8 @@
-function BasicBrush(ctx, { x, y, lineWidth}) {
+function Pen(ctx, { x, y, lineWidth, brush}) {
+    if (brush === 'eraser')
+        ctx.strokeStyle = 'white';
+
     ctx.lineWidth = lineWidth;
-    ctx.lineTo(x, y);
-    ctx.moveTo(x, y);
-}
-
-function GradientBrush(ctx, { x, y, coords, colorStops }) {
-    let gradient = ctx.createLinearGradient(
-        coords.x0,
-        coords.y0, 
-        coords.x1, 
-        coords.y1
-    );
-
-    for (const colorStop of colorStops) {
-        gradient.addColorStop(colorStop.percent, colorStop.color)
-    }
-
-    context.strokeStyle = gradient;
-
     ctx.lineTo(x, y);
     ctx.moveTo(x, y);
 }
@@ -43,12 +28,13 @@ function AirBrush(ctx, { x, y, radius }) {
 }
 
 const brushes = {
-    basicbrush: BasicBrush,
-    gradientbrush: GradientBrush,
+    pen: Pen,
+    eraser: Pen,
     airbrush: AirBrush
 };
 
-export default function getBrush(type) {
+ function getBrush(type) {
     return brushes[type];
 }
 
+export default getBrush;

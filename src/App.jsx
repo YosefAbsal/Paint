@@ -2,7 +2,7 @@ import { useEffect, useState, useRef} from 'react'
 import './App.css'
 import Canvas from './components/Canvas'
 import { ColorPalette } from './components/ColorPalette'
-
+import eraserArt from './assets/ERASER.png'
 function App() {
   const [brush, setBrush] = useState({ 
     r: 0, 
@@ -17,7 +17,8 @@ function App() {
     <div style={{
       display: 'flex',
       alignItems: 'center',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      cursor: "url('eraserArt'), auto"
     }}>
       <div className='toolbar'>
         <ColorPalette onUpdate={setBrush}/>

@@ -20,8 +20,7 @@ function Canvas(props) {
       y: cursorPosRef.current.y,
       radius: props.radius,
       lineWidth: props.lineWidth,
-      coords: props.coords,
-      colorStops: props.colorStops
+      brush: props.brush
     };
 
     newBrush(ctx, brushParams);

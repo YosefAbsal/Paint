@@ -76,6 +76,7 @@ function ColorPalette(props) {
             <div className='slidersAndColorDisp'>
                 {classNames.map((name, i) => {
                     return <input
+                        key={i}
                         className= {`${name.input}`}
                         type='range'
                         min={0}
@@ -113,10 +114,10 @@ function ColorPalette(props) {
                 <button onClick={() => setBrush({...brush, type: 'airbrush'})}>
                     <img src={airbrushArt} alt='air brush'/>
                 </button>
-                <button onClick={() => setBrush({...brush, type: 'basicbrush'})}>
+                <button onClick={() => setBrush({...brush, type: 'pen'})}>
                     <img src={pencilArt} alt='pen'/>
                 </button>
-                <button onClick={() => setBrush({...brush, r: 255, g: 255, b: 255, type: 'basicbrush'})}>
+                <button onClick={() => setBrush({...brush, type: 'eraser'})}>
                     <img src={eraserArt} alt='eraser'/>
                 </button>
             </div>
